@@ -8,9 +8,9 @@ namespace TIC_TAC_TOE
         static char[] arr = { '1','2', '3', '4', '5', '6', '7', '8', '9'};
         static int player = 1; //By default player 1 is set, that is the player that will start the game
         static int choice; //This holds the choice at which position user want to mark
-        // The flag variable checks who has won if it's value is 1 then someone has won the match
+        // The gameRunning variable checks who has won if it's value is 1 then someone has won the match
         //if -1 then Match has Draw if 0 then match is still running
-        static int flag = 0;
+        static int gameRunning = 0;
         static void Main(string[] args)
         {
             do
@@ -31,7 +31,7 @@ namespace TIC_TAC_TOE
                 choice = int.Parse(Console.ReadLine());//Taking users choice
                 choice = choice -1;
                 // checking that position where user want to run is marked (with X or O) or not
-                if (choice >= 0 && choice <= 9 ){
+                if (choice >= 0 && choice <= 8){
                 if (arr[choice] != 'X' && arr[choice] != 'O')
                 {
                     if (player % 2 == 0) //if chance is of player 2 then mark O else mark X
@@ -55,24 +55,24 @@ namespace TIC_TAC_TOE
                     Console.WriteLine("Please wait while the board loads again.....");
                     Thread.Sleep(4000);
                 }
-                flag = CheckWin();// calling of check win
+                gameRunning = CheckWin();// calling of check win
                 
             }
             else {
                 Console.WriteLine("Please Enter a number between 0 and 8");
             }}
-            while (flag != 1 && flag != -1);
+            while (gameRunning != 1 && gameRunning != -1);
             // This loop will be run until all cell of the grid is not marked
             //with X and O or some player is not win
             Console.Clear();// clearing the console
             Board();// getting filled board again
-            if (flag == 1)
-            // if flag value is 1 then someone has win or
+            if (gameRunning == 1)
+            // if gameRunning value is 1 then someone has win or
             //means who played marked last time which has win
             {
                 Console.WriteLine("Player {0} has won", (player % 2) + 1);
             }
-            else// if flag value is -1 the match will be draw and no one is winner
+            else// if gameRunning value is -1 the match will be draw and no one is winner
             {
                 Console.WriteLine("Draw");
             }
